@@ -2,6 +2,7 @@ from langchain.chat_models import ChatOpenAI
 from utils.Coordinator import Coordinator
 from utils.Worker import Worker
 from utils.Expert import Expert
+from langchain.memory import ChatMessageHistory
 
 class WorkerManager:
     def __init__(self, openai_api_key, model_name="gpt-3.5-turbo"):
@@ -9,8 +10,12 @@ class WorkerManager:
         self.model_name = model_name
         self.coordinator = None
         self.experts = []
+        self.topic = None
+        self.debate_history = []
+        #debate_history.add_message("system", "You're a helpful assistant.")
 
     def create_experts(self, num_experts, topic):
+        self.topic = topic
         coordinator_model = ChatOpenAI(openai_api_key=self.openai_api_key, model_name=self.model_name)
         self.coordinator = Coordinator(coordinator_model, num_experts, topic)
 
@@ -18,11 +23,14 @@ class WorkerManager:
 
         for expert in expert_list:
             expert_model = ChatOpenAI(openai_api_key=self.openai_api_key, model_name=self.model_name, streaming=True)
-            self.experts.append(Expert(expert_model, expert["role"]))
+            self.experts.append(Expert(expert_model, expert))
 
         
-            
     def invoke_experts(self, input_text, stream_handler):
-        response = self.experts[0].test_expert("test", stream_handler)
+        response = self.experts[0].generate_argument(self.debate_history, self.topic, stream_handler)
         print(response)
         return response
+    
+
+    def debate_round(self):
+        pass

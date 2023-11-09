@@ -3,8 +3,6 @@ from langchain.prompts import ChatPromptTemplate, FewShotChatMessagePromptTempla
 from utils.Worker import Worker
 from langchain.schema import StrOutputParser
 
-import json
-from pathlib import Path
 
 example_prompt = ChatPromptTemplate.from_messages(
             [
@@ -15,21 +13,11 @@ example_prompt = ChatPromptTemplate.from_messages(
 
 class Coordinator(Worker):
     def __init__(self, model, num_experts, topic):
-        super().__init__(model=model, role="coordinator")
+        super().__init__(model=model)
         self.num_experts = num_experts
         self.topic = topic
-        self.load_config()
-
-    def load_config(self):
-        config_path = Path(__file__).resolve().parent.parent / 'configs' / 'config.json'
-        
-        with config_path.open('r', encoding='utf-8') as f:
-            config = json.load(f)
-
-        self.coordinator_system1 = config['coordinator_systems']['system1']
-        self.coordinator_system2 = config['coordinator_systems']['system2']
-        self.examples1 = config['examples']['examples1']
-        self.examples2 = config['examples']['examples2']
+        self.system_prompts = self.config["coordinator"]['system_prompts']
+        self.examples = self.config["coordinator"]['examples']
 
 
     def generate_expert_instructions(self):
@@ -86,10 +74,10 @@ class Coordinator(Worker):
             Returns:
                 ChatPromptTemplate: The chat prompt template for selecting experts.
             """
-            coordinator_list_instruction = self.coordinator_system1.replace("##num_workers##", str(num_experts))
+            coordinator_list_instruction = self.system_prompts['system1'].replace("##num_workers##", str(num_experts))
             few_shot_prompt_list_experts = FewShotChatMessagePromptTemplate(
                 example_prompt=example_prompt,
-                examples=self.examples1,
+                examples=self.examples['examples1'],
             )
             human_query = f"{num_experts} experts for the topic: {topic}"
             list_prompt = ChatPromptTemplate.from_messages(
@@ -114,11 +102,11 @@ class Coordinator(Worker):
             """
             few_shot_prompt_instruct_expert = FewShotChatMessagePromptTemplate(
                 example_prompt=example_prompt,
-                examples=self.examples2,
+                examples=self.examples['examples2'],
             )
             expert_instruction_prompt = ChatPromptTemplate.from_messages(
                 [
-                    ("system", self.coordinator_system2),
+                    ("system", self.system_prompts['system2']),
                     few_shot_prompt_instruct_expert,
                     ("human", "role: {role}; stance: {stance}; topic: {topic}"),
                 ]

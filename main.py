@@ -6,8 +6,6 @@ from utils.StreamHandler import StreamHandler
 
 import streamlit as st
 
-from utils.Worker import Expert
-from utils.Coordinator import Coordinator
 from utils.WorkerManager import WorkerManager
 
 def initialize():
@@ -22,7 +20,7 @@ def initialize():
         st.info("Enter an OpenAI API Key to continue")
         st.stop()
 
-
+    
     st.session_state["worker_manager"] = WorkerManager(openai_api_key=st.session_state["openai_api_key"], model_name="gpt-3.5-turbo")
     # Instantiate the workers
     conv_template = ChatPromptTemplate.from_template("{topic}")
@@ -58,7 +56,7 @@ if input := st.chat_input(placeholder="Enter your topic of debate"):
     st.chat_message("user").write(user_prompt)
     worker_manager.create_experts(num_experts=value, topic=user_prompt)
 
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant2"):
         response = worker_manager.invoke_experts(input, StreamHandler(st.empty()))
         pass
         #response = coordinator.generate_expert_instructions()
