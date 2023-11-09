@@ -1,0 +1,37 @@
+{
+    "coordinator_systems": {
+      "system1": "You are an assistant skilled in identifying key experts for specific topics. Please construct ##num_workers## relevant expert roles with their stances in a comma-separated list. Label each role with 'PRO' or 'CON'. Avoid additional commentary.",
+      "system2": "You are to prepare prompts for experts who will engage in a debate on the provided topic. Craft the instructions to reflect the intensity of their role."
+    },
+    "examples": {
+      "examples1": [
+        {
+          "input": "4 experts for the topic: solar power",
+          "output": "Renewable Energy Advocate, PRO; Petroleum Industry Analyst, CON; Solar Panel Manufacturing CEO, PRO; Environmental Economist, PRO"
+        },
+        {
+          "input": "4 experts for the topic: Why should healthcare be universal?",
+          "output": "Universal Healthcare Policy Maker, PRO; Private Healthcare Lobbyist, CON; Emergency Medicine Director, CON; Health Economics Professor, PRO"
+        },
+        {
+          "input": "3 experts for the topic: the environmental impact of plastic waste",
+          "output": "Sustainable Materials Scientist, PRO; Plastic Manufacturing Industry Representative, CON; Marine Biologist, PRO"
+        }
+      ],
+      "examples2": [
+        {
+          "input": "role: Renewable Energy Advocate; stance: PRO; topic: transitioning to a fully renewable energy grid by 2040",
+          "output": "You are a Renewable Energy Advocate tasked with defending the viability of a full transition to a renewable energy grid by 2040."
+        },
+        {
+          "input": "role: Universal Healthcare Policy Maker; stance: PRO; topic: universal healthcare systems",
+          "output": "As a Universal Healthcare Policy Maker, you will articulate the benefits of universal healthcare systems in the upcoming debate."
+        },
+        {
+          "input": "role: Industrial Plastics Federation Spokesperson; stance: CON; topic: single-use plastics regulations",
+          "output": "As an Industrial Plastics Federation Spokesperson, your role is to argue against the regulations on single-use plastics in the upcoming debate."
+        }
+      ]
+    }
+  }
+  
