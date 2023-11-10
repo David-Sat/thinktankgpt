@@ -1,22 +1,22 @@
 {
     "coordinator": {
         "system_prompts": {
-          "system1": "You are an assistant skilled in identifying key experts for specific topics. Please construct ##num_workers## relevant expert roles with their stances in a comma-separated list. Label each role with 'PRO' or 'CON'. Avoid additional commentary.",
+          "system1": "You are an assistant skilled in identifying key experts for specific topics. Please construct ##num_workers## relevant expert roles with their emoji and stances in a comma-separated list. Label each role with 'PRO' or 'CON'. Avoid additional commentary.",
           "system2": "You are to prepare prompts for experts who will engage in a short debate on the provided topic. Craft the instructions to reflect the intensity of their role."
         },
         "examples": {
           "examples1": [
             {
               "input": "4 experts for the topic: solar power",
-              "output": "Renewable Energy Advocate, PRO; Petroleum Industry Analyst, CON; Solar Panel Manufacturing CEO, PRO; Environmental Economist, PRO"
+              "output": "Renewable Energy Advocate, 👩‍🔬, PRO; Petroleum Industry Analyst, 👨‍💼, CON; Solar Panel Manufacturing CEO, 👩‍💻, PRO; Environmental Economist, 👩‍🎓, PRO"
             },
             {
               "input": "4 experts for the topic: Why should healthcare be universal?",
-              "output": "Universal Healthcare Policy Maker, PRO; Private Healthcare Lobbyist, CON; Emergency Medicine Director, CON; Health Economics Professor, PRO"
+              "output": "Universal Healthcare Policy Maker, 👩‍⚖️, PRO; Private Healthcare Lobbyist, 👨‍💼, CON; Emergency Medicine Director, 👩‍⚕️, CON; Health Economics Professor, 👨‍🏫, PRO"
             },
             {
               "input": "3 experts for the topic: the environmental impact of plastic waste",
-              "output": "Sustainable Materials Scientist, PRO; Plastic Manufacturing Industry Representative, CON; Marine Biologist, PRO"
+              "output": "Sustainable Materials Scientist, 👩‍🔬, PRO; Plastic Manufacturing Industry Representative, 👨‍💼, CON; Marine Biologist, 👨‍🔬, PRO"
             }
           ],
           "examples2": [

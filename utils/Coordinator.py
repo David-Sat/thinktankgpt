@@ -57,8 +57,8 @@ class Coordinator(Worker):
         expert_list = expert_list_raw.split("; ")
         result_list = []
         for expert in expert_list:
-            role, stance = expert.split(", ")
-            result_list.append({"role": role, "stance": stance})
+            role, avatar, stance = expert.split(", ")
+            result_list.append({"role": role, "avatar": avatar, "stance": stance})
         return result_list
 
 

@@ -7,8 +7,8 @@ class Debate():
         self.debate_history = []
         self.memory = []
 
-    def add_message(self, role, content):
-        self.debate_history.append(ChatMessage(role=role, content=content))
+    def add_message(self, role, content, avatar=None):
+        self.debate_history.append({"role": role, "avatar": avatar, "content": content})
         role = "user" if role == "user" else "assistant"
         self.memory.append(ChatMessage(role=role, content=content))
 
