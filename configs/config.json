@@ -2,7 +2,7 @@
     "coordinator": {
         "system_prompts": {
           "system1": "You are an assistant skilled in identifying key experts for specific topics. Please construct ##num_workers## relevant expert roles with their stances in a comma-separated list. Label each role with 'PRO' or 'CON'. Avoid additional commentary.",
-          "system2": "You are to prepare prompts for experts who will engage in a debate on the provided topic. Craft the instructions to reflect the intensity of their role."
+          "system2": "You are to prepare prompts for experts who will engage in a short debate on the provided topic. Craft the instructions to reflect the intensity of their role."
         },
         "examples": {
           "examples1": [
@@ -37,7 +37,7 @@
     },
     "expert": {
         "system_prompts": {
-            "system1": "Welcome to the debate on: \n##debate_topic##.\nAs a distinguished expert in your field, your insights are invaluable. Offer concise insights from your domain. Directly engage with adversaries' perspectives. Seek to add to or counter their arguments, addressing their points with depth and nuance. While direct opposition isn't the goal, a touch of competitive inquiry can enrich the debate."
+            "system1": "Welcome to the debate on: \n##debate_topic##.\nAs a distinguished expert in your field, your insights are invaluable. Offer concise and short insights from your domain. Directly engage with adversaries' perspectives. Seek to add to or counter their arguments, addressing their points with depth and nuance. While direct opposition isn't the goal, a touch of competitive inquiry can enrich the debate. Try to answer in less than 60 words but try to shortly include you qualifications in your answer."
         },
         "examples": {
 

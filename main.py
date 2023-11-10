@@ -2,11 +2,11 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate  
 from langchain.schema import ChatMessage
 
-from utils.StreamHandler import StreamHandler
-
 import streamlit as st
 
+from utils.StreamHandler import StreamHandler
 from utils.WorkerManager import WorkerManager
+from utils.Debate import Debate
 
 def initialize():
     st.session_state["initialized"] = True
@@ -43,24 +43,29 @@ value = st.sidebar.slider(
 
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [ChatMessage(role="assistant", content="How can I help you?")]
+    #st.session_state["messages"] = [ChatMessage(role="assistant", content="How can I help you?")]
+    st.session_state["messages"] = Debate()
 
-for msg in st.session_state.messages:
+for msg in st.session_state.messages.debate_history:
     st.chat_message(msg.role).write(msg.content)
 
 worker_manager = st.session_state["worker_manager"]
 
 if input := st.chat_input(placeholder="Enter your topic of debate"):
     user_prompt = input.replace("Human: ", "")
-    st.session_state.messages.append(ChatMessage(role="user", content=user_prompt))
+    #st.session_state.messages.append(ChatMessage(role="user", content=user_prompt))
+    st.session_state.messages.add_message(role="user", content=user_prompt)
+    st.session_state.messages.set_topic(user_prompt)
     st.chat_message("user").write(user_prompt)
-    worker_manager.create_experts(num_experts=value, topic=user_prompt)
+    experts = worker_manager.create_experts(num_experts=value, topic=user_prompt)
 
-    with st.chat_message("assistant2"):
-        response = worker_manager.invoke_experts(input, StreamHandler(st.empty()))
-        pass
-        #response = coordinator.generate_expert_instructions()
-        st.session_state.messages.append(ChatMessage(role="assistant", content=response))
+    for expert in experts:
+        with st.chat_message("expert"):
+            response = expert.generate_argument(st.session_state.messages, StreamHandler(st.empty()))
+            #st.session_state.messages.append(ChatMessage(role=expert.expert_instruction["role"], content=response))
+            st.session_state.messages.add_message(role=expert.expert_instruction["role"], content=response)
+
+    
 
     #with st.chat_message("assistant"):
         #response = current_worker.get_response(input, st.empty(), st.session_state.messages)

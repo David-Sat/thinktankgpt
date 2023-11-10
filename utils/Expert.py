@@ -1,13 +1,8 @@
 from operator import itemgetter
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.schema.runnable import RunnablePassthrough, RunnableLambda
+from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser, ChatMessage
 
-from langchain.memory import ConversationBufferMemory
-
 from utils.Worker import Worker
-
-
 
 class Expert(Worker):
     def __init__(self, model, expert_instruction):
@@ -34,12 +29,12 @@ class Expert(Worker):
         }
         return chain.invoke(input={}, config=config)
     
-    def generate_argument(self, debate_history, topic, stream_handler):
-        system_prompt = self.system_prompts["system1"].replace("##debate_topic##", topic)
+    def generate_argument(self, debate, stream_handler):
+        system_prompt = self.system_prompts["system1"].replace("##debate_topic##", debate.topic)
         system_prompt += "\n" + self.expert_instruction["instructions"]
 
         messages = [ChatMessage(role="system", content=system_prompt)]
-        #messages.append(debate_history)
+        messages.extend(debate.memory)
 
         debate_prompt = ChatPromptTemplate.from_messages(messages)
 
