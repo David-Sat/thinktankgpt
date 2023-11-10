@@ -20,20 +20,38 @@ def initialize():
         st.info("Enter an OpenAI API Key to continue")
         st.stop()
 
-    
     st.session_state["worker_manager"] = WorkerManager(openai_api_key=st.session_state["openai_api_key"], model_name="gpt-3.5-turbo")
-    # Instantiate the workers
-    conv_template = ChatPromptTemplate.from_template("{topic}")
-    #st.session_state["coordinator"] = Coordinator(openai_api_key=st.session_state["openai_api_key"])
+    st.session_state["experts"] = []
     
-    #st.session_state["worker1"] = Expert(openai_api_key=st.session_state["openai_api_key"], role="expert", conv_template=conv_template)
+st.markdown(
+    """
+<style>
+/* Styling the button */
+.stButton > button {
+    width: 100%;
+    height: auto;
+    margin-top: 28px; 
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+st.title("ThinkTankGPT")
+header_title = ""
+st.header(header_title)
+
+form = st.form(key="form_settings")
+topicCol, buttonCol = form.columns([4,1])
+
+topic = topicCol.text_input(
+    "Enter your topic of debate",
+    key="topic",
+)
 
 
-if "initialized" not in st.session_state:
-    initialize()
-
-
-value = st.sidebar.slider(
+expander = form.expander("Customize debate")
+number_experts = expander.slider(
     'Number of experts:',
     min_value=2,      
     max_value=6, 
@@ -41,9 +59,14 @@ value = st.sidebar.slider(
     step=1
 )
 
+options = ["Strongly For", "For", "Neutral", "Against", "Strongly Against"]
+stance = expander.select_slider("Stance of the experts", options=options, value="Neutral")
+submitted = buttonCol.form_submit_button(label="Submit")
+
+if "initialized" not in st.session_state:
+    initialize()
 
 if "messages" not in st.session_state:
-    #st.session_state["messages"] = [ChatMessage(role="assistant", content="How can I help you?")]
     st.session_state["messages"] = Debate()
 
 for msg in st.session_state.messages.debate_history:
@@ -51,23 +74,29 @@ for msg in st.session_state.messages.debate_history:
 
 worker_manager = st.session_state["worker_manager"]
 
-if input := st.chat_input(placeholder="Enter your topic of debate"):
-    user_prompt = input.replace("Human: ", "")
-    #st.session_state.messages.append(ChatMessage(role="user", content=user_prompt))
-    st.session_state.messages.add_message(role="user", content=user_prompt)
-    st.session_state.messages.set_topic(user_prompt)
-    st.chat_message("user").write(user_prompt)
-    experts = worker_manager.create_experts(num_experts=value, topic=user_prompt)
-
-    for expert in experts:
+def debate_round():
+    for expert in st.session_state["experts"]:
         with st.chat_message("expert"):
             response = expert.generate_argument(st.session_state.messages, StreamHandler(st.empty()))
-            #st.session_state.messages.append(ChatMessage(role=expert.expert_instruction["role"], content=response))
             st.session_state.messages.add_message(role=expert.expert_instruction["role"], content=response)
 
-    
+if submitted and topic.strip() != "":
+    st.session_state.messages.add_message(role="user", content=topic)
+    st.session_state.messages.set_topic(topic)
+    st.chat_message("user").write(topic)
+    st.session_state["experts"] = worker_manager.create_experts(num_experts=number_experts, topic=topic)
 
-    #with st.chat_message("assistant"):
-        #response = current_worker.get_response(input, st.empty(), st.session_state.messages)
-        #st.session_state.messages.append(ChatMessage(role="assistant", content=response))
+    debate_round()
+
+
+if input := st.chat_input(placeholder="Participate in the debate"):
+    user_prompt = input.replace("Human: ", "")
+    st.session_state.messages.add_message(role="user", content=user_prompt)
+    #st.session_state.messages.append(ChatMessage(role="user", content=user_prompt))
+    st.chat_message("user").write(user_prompt)
+    #experts = worker_manager.create_experts(num_experts=number_experts, topic=user_prompt)
+
+    debate_round()
+
+    
 
