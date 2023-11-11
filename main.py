@@ -22,17 +22,23 @@ def initialize():
 
 st.markdown(
     """
-<style>
-/* Styling the button */
-.stButton > button {
-    width: 100%;
-    height: auto;
-    margin-top: 28px; 
-}
-</style>
-""",
+    <style>
+    .stButton > button {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Apply margin-top only for non-mobile views */
+    @media (min-width: 768px) {
+        [data-testid="stFormSubmitButton"] > button {
+            margin-top: 28px;
+        }
+    }
+    </style>
+    """,
     unsafe_allow_html=True,
 )
+
 
 st.title("ThinkTankGPT")
 
@@ -59,7 +65,6 @@ stance = expander.select_slider("Stance of the experts", options=options, value=
 submitted = buttonCol.form_submit_button(label="Submit", on_click=initialize)
 
 chat = st.container()
-chat_options = st.container()
 
 if "debate" in st.session_state:
     for msg in st.session_state.debate.debate_history:
@@ -79,12 +84,12 @@ if submitted and topic.strip() != "":
     debate_round()
 
 if "initialized" in st.session_state and st.session_state["initialized"]:
-    if input := chat_options.chat_input(placeholder="Participate in the debate"):
+    if input := st.chat_input(placeholder="Participate in the debate"):
         user_prompt = input.replace("Human: ", "")
         st.session_state.debate.add_message(role="user", content=user_prompt)
         chat.chat_message("user").write(user_prompt)
 
         debate_round()
 
-    chat_options.button("Next round of debate", on_click=debate_round)
+    st.button("Continue debate", on_click=debate_round)
 
