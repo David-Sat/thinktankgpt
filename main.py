@@ -3,9 +3,7 @@ import streamlit as st
 from utils.StreamHandler import StreamHandler
 from utils.Debate import Debate
 
-def initialize():
-    st.session_state["initialized"] = True
-    # Get an OpenAI API Key before continuing
+def get_openai_api_key():
     if "openai_api_key" not in st.session_state:
         if "openai_api_key" in st.secrets:
             st.session_state["openai_api_key"] = st.secrets.openai_api_key
@@ -15,9 +13,12 @@ def initialize():
         st.info("Enter an OpenAI API Key to continue")
         st.stop()
 
+def initialize():
+    st.session_state["initialized"] = True
+    get_openai_api_key()
     st.session_state["experts"] = []
     st.session_state["debate"] = Debate(openai_api_key=st.session_state["openai_api_key"], model_name="gpt-3.5-turbo")
-    
+
 
 st.markdown(
     """
@@ -34,8 +35,6 @@ st.markdown(
 )
 
 st.title("ThinkTankGPT")
-header_title = ""
-st.header(header_title)
 
 form = st.form(key="form_settings")
 topicCol, buttonCol = form.columns([4,1])
@@ -62,7 +61,6 @@ submitted = buttonCol.form_submit_button(label="Submit", on_click=initialize)
 chat = st.container()
 chat_options = st.container()
 
-
 if "debate" in st.session_state:
     for msg in st.session_state.debate.debate_history:
         chat.chat_message(name=msg["role"], avatar=msg["avatar"]).write(msg["content"])
@@ -75,9 +73,6 @@ def debate_round():
             st.session_state.debate.add_message(role=expert.expert_instruction["role"], avatar=expert.expert_instruction["avatar"], content=response)
 
 if submitted and topic.strip() != "":
-    st.session_state.debate.add_message(role="user", content=topic)
-    # TODO: set header title here with callback
-    chat.chat_message("user").write(topic)
     st.session_state["debate"].initialize_new_debate(topic=topic, num_experts=number_experts)
     st.session_state["experts"] = st.session_state["debate"].get_experts()
 
