@@ -34,7 +34,11 @@ class Expert(Worker):
         system_prompt += "\n" + self.expert_instruction["instructions"]
 
         messages = [ChatMessage(role="system", content=system_prompt)]
-        messages.extend(debate.memory)
+
+        if len(debate.memory) > 0:
+            messages.extend(debate.memory)
+            reminder = f"Shortly engage with your adversaries as the {self.expert_instruction['role']}."
+            messages.append(ChatMessage(role="system", content=reminder))
 
         debate_prompt = ChatPromptTemplate.from_messages(messages)
 

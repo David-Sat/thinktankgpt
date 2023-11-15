@@ -12,7 +12,7 @@ example_prompt = ChatPromptTemplate.from_messages(
         )
 
 class Coordinator(Worker):
-    def __init__(self, model, num_experts, topic):
+    def __init__(self, model, num_experts, topic, stance):
         super().__init__(model=model)
         self.num_experts = num_experts
         self.topic = topic
@@ -62,18 +62,7 @@ class Coordinator(Worker):
         return result_list
 
 
-    def create_list_prompt(self, num_experts, topic, example_prompt):
-            """
-            Creates a chat prompt template for selecting a list of experts for a given topic.
-
-            Args:
-                num_experts (int): The number of experts to select.
-                topic (str): The topic for which experts are being selected.
-                example_prompt (str): The prompt to use for the few-shot examples.
-
-            Returns:
-                ChatPromptTemplate: The chat prompt template for selecting experts.
-            """
+    def create_list_prompt(self, num_experts: int, topic: str, example_prompt: str) -> ChatPromptTemplate:
             coordinator_list_instruction = self.system_prompts['system1'].replace("##num_workers##", str(num_experts))
             few_shot_prompt_list_experts = FewShotChatMessagePromptTemplate(
                 example_prompt=example_prompt,
@@ -90,16 +79,7 @@ class Coordinator(Worker):
             return list_prompt
 
 
-    def create_expert_instruction_prompt(self, example_prompt):
-            """
-            Creates a chat prompt template for expert instruction.
-
-            Args:
-                example_prompt (str): The example prompt to use in the chat prompt.
-
-            Returns:
-                ChatPromptTemplate: The chat prompt template for expert instruction.
-            """
+    def create_expert_instruction_prompt(self, example_prompt: str) -> ChatPromptTemplate:
             few_shot_prompt_instruct_expert = FewShotChatMessagePromptTemplate(
                 example_prompt=example_prompt,
                 examples=self.examples['examples2'],
