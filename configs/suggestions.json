@@ -1,0 +1,44 @@
+{
+    "suggestions": [
+		{
+			"topic": "Universal Basic Income",
+			"debate_history": [
+			  {
+				"role": "Economic Policy Researcher",
+				"avatar": "👨‍🔬",
+				"content": "Universal Basic Income (UBI) is a necessary response to the increasing automation of jobs. It ensures economic security and empowers individuals to pursue opportunities that are meaningful to them. UBI has the potential to reduce poverty, stimulate entrepreneurship, and promote social cohesion. As an Economic Policy Researcher, I have studied the impact of UBI on various societies and found it to be a viable solution to address income inequality and provide a safety net for all."
+			  },
+			  {
+				"role": "Business Owner",
+				"avatar": "👩‍💼",
+				"content": "While I understand the potential benefits of Universal Basic Income (UBI), as a Business Owner, I have concerns about its implementation. UBI may disincentivize work and create dependency on government support. It could also have significant financial implications, potentially burdening businesses and stifling economic growth. As someone who has experienced the challenges of running a business, I believe there are alternative solutions that can address income inequality without resorting to a universal income guarantee."
+			  },
+			  {
+				"role": "Social Welfare Advocate",
+				"avatar": "👩‍🏫",
+				"content": "As a Social Welfare Advocate, I understand your concerns about potential disincentives and financial implications. However, studies have shown that UBI does not significantly disincentivize work, but rather provides individuals with the stability and freedom to pursue better opportunities. Additionally, UBI can be funded through various means such as progressive taxation or redirecting existing welfare programs, ensuring that the burden is not solely on businesses. Let's explore these alternatives further to find a solution that benefits both individuals and businesses."
+			  }
+			],
+			"expert_instructions": [
+			  {
+				"role": "Economic Policy Researcher",
+				"avatar": "👨‍🔬",
+				"stance": "PRO",
+				"instructions": "You are an Economic Policy Researcher tasked with advocating for the implementation of Universal Basic Income in the upcoming debate. Your role is to present compelling arguments and evidence in support of this policy."
+			  },
+			  {
+				"role": "Business Owner",
+				"avatar": "👩‍💼",
+				"stance": "CON",
+				"instructions": "In this debate, you are playing the role of a Business Owner and your stance is against the concept of Universal Basic Income. Your task is to present arguments against the implementation of Universal Basic Income."
+			  },
+			  {
+				"role": "Social Welfare Advocate",
+				"avatar": "👩‍🏫",
+				"stance": "PRO",
+				"instructions": "You are a Social Welfare Advocate tasked with passionately advocating for the implementation of Universal Basic Income in the upcoming debate."
+			  }
+			]
+		}
+    ]
+}

@@ -25,7 +25,7 @@ class Debate():
 
     def initialize_new_debate(self, topic, num_experts, stance):
         self.topic = topic
-        expert_instructions = self.get_expert_instructions(num_experts, stance)
+        expert_instructions = self.create_expert_instructions(num_experts, stance)
         self.experts = self.generate_experts(expert_instructions)
 
     def initialize_existing_debate(self, topic, debate_history, expert_instructions):
@@ -36,7 +36,7 @@ class Debate():
             self.memory.append(ChatMessage(role=role, content=message["content"]))
         self.experts = self.generate_experts(expert_instructions)
 
-    def get_expert_instructions(self, num_experts, stance):
+    def create_expert_instructions(self, num_experts, stance):
         coordinator_model = ChatOpenAI(openai_api_key=self.openai_api_key, model_name=self.model_name)
         coordinator = Coordinator(coordinator_model, num_experts, self.topic, stance)
         return coordinator.generate_expert_instructions()
@@ -47,3 +47,6 @@ class Debate():
             expert_model = ChatOpenAI(openai_api_key=self.openai_api_key, model_name=self.model_name, streaming=True)
             experts.append(Expert(expert_model, expert_instruction))
         return experts
+    
+    def get_debate_params(self):
+        return {"topic": self.topic, "debate_history": self.debate_history, "expert_instructions": [expert.expert_instruction for expert in self.experts]}

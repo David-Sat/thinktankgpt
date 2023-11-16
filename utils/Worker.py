@@ -32,7 +32,5 @@ class Worker:
 
         return response
     
-    def build_chat_history(self, messages):
-        pass
 
 
