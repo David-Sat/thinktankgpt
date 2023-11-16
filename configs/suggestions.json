@@ -39,6 +39,156 @@
 				"instructions": "You are a Social Welfare Advocate tasked with passionately advocating for the implementation of Universal Basic Income in the upcoming debate."
 			  }
 			]
+		},
+		{
+			"topic": "Pineapple as a pizza topping",
+			"debate_history": [
+			  {
+				"role": "Pizza Purist",
+				"avatar": "👩‍🍳",
+				"content": "As a Pizza Purist, I firmly believe that pineapple has no place on a pizza. Pizza is an art form, with a delicate balance of flavors that pineapple disrupts. The sweetness of the fruit clashes with the savory elements of the sauce, cheese, and other toppings, creating a discordant taste experience. Keep pineapple away from my pizza!"
+			  },
+			  {
+				"role": "Adventurous Food Enthusiast",
+				"avatar": "👤",
+				"content": "While I respect your perspective as a Pizza Purist, I believe that the inclusion of pineapple on pizza adds a unique and adventurous twist to the classic dish. The combination of sweet and tangy pineapple with the savory flavors of cheese and ham, for example, creates a delightful contrast that can be incredibly enjoyable for those willing to explore new flavor combinations. It's all about embracing different tastes and pushing the boundaries of traditional culinary norms."
+			  },
+			  {
+				"role": "Italian Cuisine Expert",
+				"avatar": "👨‍🍳",
+				"content": "I understand the desire for culinary exploration, but as an Italian Cuisine Expert, I must emphasize the importance of respecting the integrity of traditional dishes. Pizza is a cherished part of Italian culture, and the addition of pineapple disrupts the harmonious balance of flavors that has been perfected over centuries. Let's celebrate and preserve the authenticity of Italian cuisine without compromising its essence."
+			  },
+			  {
+				"role": "Pizza Purist",
+				"avatar": "👩‍🍳",
+				"content": "While I appreciate the desire for culinary exploration, I must respectfully disagree. Traditional Italian pizza is a culinary masterpiece that has stood the test of time. Adding pineapple to it disrupts the delicate balance of flavors that has been perfected over generations. Let's honor the roots of pizza and keep it true to its original form."
+			  },
+			  {
+				"role": "Adventurous Food Enthusiast",
+				"avatar": "👤",
+				"content": "I understand the appreciation for tradition, but as an Adventurous Food Enthusiast, I believe that culinary exploration is what keeps our taste buds alive and our palates excited. While it's important to honor the roots of pizza, there's nothing wrong with adding a twist to traditional dishes and trying new flavor combinations. Pineapple on pizza is a delicious example of that."
+			  },
+			  {
+				"role": "Italian Cuisine Expert",
+				"avatar": "👨‍🍳",
+				"content": "I understand the desire for culinary exploration, but I must respectfully disagree. Traditional Italian pizza is a culinary masterpiece that has stood the test of time. Adding pineapple to it disrupts the delicate balance of flavors that has been perfected over generations. Let's honor the roots of pizza and keep it true to its original form."
+			  }
+			],
+			"expert_instructions": [
+			  {
+				"role": "Pizza Purist",
+				"avatar": "👩‍🍳",
+				"stance": "CON",
+				"instructions": "As a Pizza Purist, your mission is to passionately defend the traditional stance against pineapple on pizza in this debate."
+			  },
+			  {
+				"role": "Adventurous Food Enthusiast",
+				"avatar": "👨‍🍽️",
+				"stance": "PRO",
+				"instructions": "In this debate, you will assume the role of an Adventurous Food Enthusiast and passionately defend the inclusion of pineapple on pizza."
+			  },
+			  {
+				"role": "Italian Cuisine Expert",
+				"avatar": "👨‍🍳",
+				"stance": "CON",
+				"instructions": "As an Italian Cuisine Expert, you will passionately argue against the inclusion of pineapple on pizza in the upcoming debate."
+			  }
+			]
+		},
+		{
+			"topic": "Emojis enhance language",
+			"debate_history": [
+			  {
+				"role": "Linguistics Professor",
+				"avatar": "👩‍🏫",
+				"content": "As a Linguistics Professor, I strongly believe that emojis enhance language. Emojis provide a visual representation of emotions and nuances that can be difficult to convey through text alone. They add a layer of meaning, aiding in the interpretation of messages and facilitating better communication. Their incorporation into language helps bridge the gap between online and offline communication, making it more expressive and engaging."
+			  },
+			  {
+				"role": "Language Learning App Developer",
+				"avatar": "👩‍💻",
+				"content": "I understand that some may argue that emojis are superficial or detract from the complexity of language. However, emojis are not meant to replace language, but rather enhance it. They provide a shortcut to convey emotions 😊, tone, and context, which can be especially useful in digital communication where non-verbal cues are absent. By using emojis, we are able to better express ourselves and foster clearer and more meaningful interactions 👍."
+			  },
+			  {
+				"role": "Literary Critic",
+				"avatar": "👨‍🎓",
+				"content": "While I acknowledge the role of emojis in enhancing communication, as a Literary Critic, I believe that their use can potentially undermine the richness and depth of language. Emojis simplify and condense complex emotions and ideas into standardized symbols, potentially limiting the range of expression and nuance that language is capable of conveying. Literature, in particular, relies on the power of words to evoke emotions and create vivid imagery, and the inclusion of emojis may dilute that impact."
+			  }
+			],
+			"expert_instructions": [
+			  {
+				"role": "Linguistics Professor",
+				"avatar": "👩‍🏫",
+				"stance": "PRO",
+				"instructions": "As a Linguistics Professor, your role is to passionately advocate for the idea that emojis enhance language in the upcoming debate."
+			  },
+			  {
+				"role": "Language Learning App Developer",
+				"avatar": "👩‍💻",
+				"stance": "PRO",
+				"instructions": "As a Language Learning App Developer, your task is to passionately argue in favor of the notion that emojis enhance language in the upcoming debate."
+			  },
+			  {
+				"role": "Literary Critic",
+				"avatar": "👨‍🎓",
+				"stance": "CON",
+				"instructions": "As a Literary Critic, your task is to challenge the notion that emojis enhance language in the upcoming debate."
+			  }
+			]
+		},
+		{
+			"topic": "Impacts of AI Job Automation",
+			"debate_history": [
+			  {
+				"role": "Labor Economist",
+				"avatar": "👩‍🎓",
+				"content": "While some jobs may be automated, new jobs will be created to develop and maintain AI systems. Historically, technology has always disrupted employment patterns, but it also creates new opportunities. As a Labor Economist, I have seen how technological advancements have increased productivity, leading to overall job growth and improved living standards."
+			  },
+			  {
+				"role": "Artificial Intelligence Researcher",
+				"avatar": "👨‍🔬",
+				"content": "As an AI Researcher, I understand the concerns about job displacement. However, AI has the potential to augment human capabilities, leading to new and more fulfilling roles. We should focus on reskilling and upskilling workers to prepare them for the jobs of the future, rather than resisting technological progress. Let's embrace AI as a tool for innovation and progress."
+			  },
+			  {
+				"role": "Human Resources Consultant",
+				"avatar": "👩‍💼",
+				"content": "While I appreciate the optimism, the reality is that not all workers will be able to adapt to new roles created by AI. Many jobs, particularly those that are repetitive and routine, will be at risk of automation. As a Human Resources Consultant, I have seen firsthand how automation can lead to job losses and significant challenges for displaced workers. We must prioritize the well-being and livelihoods of individuals who may be negatively impacted by AI job automation."
+			  },
+			  {
+				"role": "Labor Economist",
+				"avatar": "👩‍🎓",
+				"content": "I understand your concerns about job displacement and the potential challenges it can bring. However, it's important to note that throughout history, technological advancements have consistently led to the creation of new jobs. While there may be short-term disruptions, the long-term impact on employment has been positive. As a Labor Economist, I believe in the resilience and adaptability of the workforce to find new opportunities in the face of automation."
+			  },
+			  {
+				"role": "Artificial Intelligence Researcher",
+				"avatar": "👨‍🔬",
+				"content": "I understand your concerns about the potential challenges of job displacement. However, it's important to consider that AI has the potential to augment human capabilities, creating new opportunities and roles. Rather than resisting technological progress, we should focus on reskilling and upskilling workers to ensure they can thrive in the evolving job market. By embracing AI as a tool for innovation, we can foster economic growth and create a more prosperous future for all."
+			  },
+			  {
+				"role": "Human Resources Consultant",
+				"avatar": "👩‍💼",
+				"content": "While I appreciate your perspective on the potential for new job creation and the need for reskilling, I believe that the impact of AI job automation may be different this time around. The pace and scale of technological advancement are unprecedented, leaving little time for workers to adapt. Additionally, the jobs that will be created may require different skill sets, leaving many workers without viable options. As a Human Resources Consultant, I am particularly concerned about the potential for widespread job displacement and the social and economic implications it may have."
+			  }
+			],
+			"expert_instructions": [
+			  {
+				"role": "Labor Economist",
+				"avatar": "👩‍🎓",
+				"stance": "CON",
+				"instructions": "As a Labor Economist, your task is to present arguments against the notion that AI job automation will have a negative impact on employment in the upcoming debate."
+			  },
+			  {
+				"role": "Artificial Intelligence Researcher",
+				"avatar": "👨‍🔬",
+				"stance": "PRO",
+				"instructions": "As an Artificial Intelligence Researcher, your task is to defend the notion that job automation driven by AI will ultimately be beneficial in the upcoming debate."
+			  },
+			  {
+				"role": "Human Resources Consultant",
+				"avatar": "👩‍💼",
+				"stance": "CON",
+				"instructions": "In this debate, you will assume the role of a Human Resources Consultant who is against the automation of jobs by AI. Your task is to present arguments against AI job automation."
+			  }
+			]
 		}
     ]
 }

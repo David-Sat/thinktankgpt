@@ -5,6 +5,12 @@ import json
 from utils.StreamHandler import StreamHandler
 from utils.Debate import Debate
 
+def is_first_load():
+    if "first_load_done" not in st.session_state:
+        st.session_state["first_load_done"] = True
+        return True
+    return False
+
 def get_openai_api_key():
     if "openai_api_key" not in st.session_state:
         if "openai_api_key" in st.secrets:
@@ -38,7 +44,9 @@ def display_suggestions():
     suggestions = st.container()
     columns = suggestions.columns(4)
     for i, suggestion in enumerate(st.session_state["suggestions"][:4]):
-        columns[i].button(suggestion["topic"], on_click=lambda: initialize_debate(start_new=False, debate_history=suggestion["debate_history"], expert_instructions=suggestion["expert_instructions"]))
+        button_key = f"suggestion_btn_{i}" 
+        columns[i].button(suggestion["topic"], key=button_key, on_click=lambda suggestion=suggestion: initialize_debate(start_new=False, debate_history=suggestion["debate_history"], expert_instructions=suggestion["expert_instructions"]))
+
 
 def conduct_debate_round():
     default_avatar = "👤"
@@ -94,7 +102,8 @@ number_experts = expander.slider(
 )
 
 options = ["Strongly For", "For", "Neutral", "Against", "Strongly Against"]
-stance = expander.select_slider("Stance of the experts", options=options, value="Neutral")
+#stance = expander.select_slider("Stance of the experts", options=options, value="Neutral")
+stance = "Neutral"
 
 # Trigger initialization
 submitted = buttonCol.form_submit_button(label="Submit")
@@ -103,6 +112,11 @@ if submitted and topic.strip():
 
 # Load and display suggestions
 load_debate_configuration()
+
+if is_first_load():
+    default_suggestion = st.session_state["suggestions"][2]
+    initialize_debate(start_new=False, debate_history=default_suggestion["debate_history"], expert_instructions=default_suggestion["expert_instructions"])
+
 display_suggestions()
 
 ## Chat interface
@@ -130,4 +144,6 @@ if "initialized" in st.session_state and st.session_state["initialized"]:
         conduct_debate_round()
 
     st.button("Continue debate", on_click=conduct_debate_round)
+    #st.write(st.session_state.debate.get_debate_params())
+
 

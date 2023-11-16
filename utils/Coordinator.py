@@ -16,6 +16,7 @@ class Coordinator(Worker):
         super().__init__(model=model)
         self.num_experts = num_experts
         self.topic = topic
+        self.stance = stance
         self.system_prompts = self.config["coordinator"]['system_prompts']
         self.examples = self.config["coordinator"]['examples']
 
