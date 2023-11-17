@@ -2,34 +2,18 @@ from operator import itemgetter
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser, ChatMessage
 
+from typing import Dict, Any, Callable
 from utils.Worker import Worker
 
 class Expert(Worker):
-    def __init__(self, model, expert_instruction):
+    def __init__(self, model: str, expert_instruction: Dict[str, str]) -> None:
         super().__init__(model=model)
         self.expert_instruction = expert_instruction
         self.system_prompts = self.config["expert"]['system_prompts']
         self.examples = self.config["expert"]['examples']
-
-
-    def test_expert(self, input_text, stream_handler):
-        list_prompt = ChatPromptTemplate.from_messages(
-            [
-                ("system", "You're a helpful assistant."),
-                ("human", "Return a prime number"),
-            ]
-        )
-        chain = (
-            list_prompt
-            | self.model
-            | StrOutputParser()
-        )
-        config = {
-            "callbacks": [stream_handler]
-        }
-        return chain.invoke(input={}, config=config)
     
-    def generate_argument(self, debate, stream_handler):
+    
+    def generate_argument(self, debate: Any, stream_handler: Callable) -> str:
         system_prompt = self.system_prompts["system1"].replace("##debate_topic##", debate.topic)
         system_prompt += "\n" + self.expert_instruction["instructions"]
 

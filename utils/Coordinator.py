@@ -1,5 +1,6 @@
 
 from langchain.prompts import ChatPromptTemplate, FewShotChatMessagePromptTemplate
+from typing import List, Dict
 from utils.Worker import Worker
 from langchain.schema import StrOutputParser
 
@@ -21,13 +22,7 @@ class Coordinator(Worker):
         self.examples = self.config["coordinator"]['examples']
 
 
-    def generate_expert_instructions(self):
-            """
-            Generates expert instructions for the given topic and number of experts.
-
-            Returns:
-            expert_list (list): A list of dictionaries containing expert information and instructions.
-            """
+    def generate_expert_instructions(self) -> List[Dict]:
             list_prompt = self.create_list_prompt(self.num_experts, self.topic, example_prompt)
             chain1 = (
                 list_prompt
@@ -54,7 +49,7 @@ class Coordinator(Worker):
 
             return expert_list
 
-    def process_expert_list(self, expert_list_raw):
+    def process_expert_list(self, expert_list_raw: str) -> List[Dict[str, str]]:
         expert_list = expert_list_raw.split("; ")
         result_list = []
         for expert in expert_list:
