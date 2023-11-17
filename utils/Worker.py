@@ -15,22 +15,5 @@ class Worker:
             config = json.load(f)
         return config
 
-    def get_response(self, input_text, container, messages):
-        model = ChatOpenAI(openai_api_key=self.openai_api_key, model_name=self.model_name, streaming=True, callbacks=[StreamHandler(container)])
-        debate = ChatPromptTemplate.from_messages(
-            messages
-        )
-
-        chain = (
-            debate
-            | model
-        )
-
-        response = ""
-        for chunk in chain.stream({"topic": input_text}):
-            response += chunk.content
-
-        return response
-    
 
 
